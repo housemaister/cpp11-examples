@@ -110,6 +110,49 @@ TEST(Lambda, for_each_loop) {
     } );
 }
 
+/* in c++03 for_each takes a function pointer: */
+
+TEST(Lambda, for_each_loop_without_lambda) {
+    struct adder {
+        adder(int & external_data) :
+            m_total(external_data)
+        {}
+
+        void operator()(int value) {
+            m_total += value;
+        }
+
+        int & m_total;
+    };
+
+    int total = 0;
+    std::vector<int> vec;
+
+    adder sum(total);
+    vec.push_back( 1 );
+    vec.push_back( 2 );
+
+    std::for_each(vec.begin(), vec.end(), sum);
+    ASSERT_THAT(total, ::testing::Eq(3));
+}
+
+
+TEST(Lambda, for_each_loop_with_lambda) {
+    int total = 0;
+    std::vector<int> vec;
+    vec.push_back( 1 );
+    vec.push_back( 2 );
+    std::for_each(vec.begin(), vec.end(), [&total] (int val) {
+        total += val;
+    } );
+
+    ASSERT_THAT(total, ::testing::Eq(3));
+}
+
+/* --> for another implementation without lambda: see Loops.cpp */
+
+
+
 /* return values:
    * compiler automatically determines return value (cf auto)
    * specify with new syntax; e.g.:
