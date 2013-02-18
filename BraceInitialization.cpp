@@ -113,7 +113,7 @@ TEST(BraceInitialization, CanBeUsedForArguments) {
 
 /* Direct initialisation at member level!! */
 /* Does not work with gcc 4.6 */
-/* "Non-static data member initializers" in gcc 4.7
+/* "Non-static data member initializers" in gcc 4.7 */
 TEST(BraceInitialization, CanBeUsedToDirectlyInitializeMemberVariables) {
     struct ReportCard {
         std::string strArrayGrades[5] {"A", "B", "C", "D", "F"};
@@ -130,7 +130,7 @@ TEST(MemInit, OverridesMemberVariableInitialization) {
 
     ASSERT_THAT(card.strSchoolName, ::testing::Eq("Chipeta Elementary"));
 }
-*/
+/**/
 /* Temporary Type Names */
 
 TEST(BraceInitialization, EliminatesNeedToSpecifyTempTypeName) {
@@ -197,28 +197,29 @@ TEST(BraceInitialization, CanIncludeEqualsSign) {
    ASSERT_THAT(i, ::testing::Eq(99));
 }
 
-/* Warning is not emited in gcc 4.6
+/* Warning is not emited in gcc 4.6 */
 TEST(BraceInitialization, AvoidsNarrowingConversionProblem) {
-   int badPi = 3.1415927;
-   ASSERT_THAT(badPi, ::testing::Eq(3));
+    int badPi = 3.1415927;
+    ASSERT_THAT(badPi, ::testing::Eq(3));
 
-   int pi{3.1415927}; // emits warning by default
-   // warning: narrowing conversion of ‘3.1415926999999999e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
-   ASSERT_THAT(pi, ::testing::Eq(3.1415927));
+    int pi{3.1415927}; // emits warning by default
+    // warning: narrowing conversion of ‘3.1415926999999999e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
+    // fails: ASSERT_THAT(pi, ::testing::Eq(3.1415927));
+    ASSERT_THAT(pi, ::testing::Eq(3));
 }
-*/
+/**/
 
 /* use with auto */
 
 TEST(BraceInitialization, IsProbablyNotWhatYouWantWhenUsingAuto) {
-   auto x{9};
-   ASSERT_THAT(x, ::testing::A<const std::initializer_list<int>>());
-   // in other words, the following assignment passes compilation. Thus x is *not* an int.
-   const std::initializer_list<int> y = x;
+    auto x{9};
+    ASSERT_THAT(x, ::testing::A<const std::initializer_list<int>>());
+    // in other words, the following assignment passes compilation. Thus x is *not* an int.
+    const std::initializer_list<int> y = x;
 }
 
 /* tricky bits (as it is c++) */
-/* Does not work with gcc 4.6
+/* Does not work with gcc 4.6 */
 TEST(BraceInitialization, AvoidsTheMostVexingParse) {
    struct IsbnService {
       IsbnService() {}
@@ -239,5 +240,5 @@ TEST(BraceInitialization, AvoidsTheMostVexingParse) {
 
    ASSERT_THAT(name, ::testing::Eq("book name"));
 }
-*/
+/**/
 
