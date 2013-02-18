@@ -45,6 +45,14 @@ TEST(BraceInitialization, SupportsArrays) {
     ASSERT_THAT(iArray, ::testing::ElementsAre(1, 1, 2, 3, 5, 8));
 }
 
+TEST(BraceInitialization, WithVector) {
+    std::vector<int> vecOne(7);
+    ASSERT_THAT(vecOne.size(), ::testing::Eq(7));
+
+    std::vector<int> vecTwo{7};
+    ASSERT_THAT(vecTwo.size(), ::testing::Eq(1));
+}
+
 
 /* also maps: */
 
