@@ -16,6 +16,7 @@
 #include <gmock/gmock.h>
 
 #include <vector>
+#include <numeric>
 
 /* Loops can be done with:
  *  - loop with indices

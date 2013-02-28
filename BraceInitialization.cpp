@@ -210,10 +210,10 @@ TEST(BraceInitialization, AvoidsNarrowingConversionProblem) {
     int badPi = 3.1415927;
     ASSERT_THAT(badPi, ::testing::Eq(3));
 
-    int pi{3.1415927}; // emits warning by default
+//    int pi{3.1415927}; // emits warning by default -> in clang even error
     // warning: narrowing conversion of ‘3.1415926999999999e+0’ from ‘double’ to ‘int’ inside { } [-Wnarrowing]
     // fails: ASSERT_THAT(pi, ::testing::Eq(3.1415927));
-    ASSERT_THAT(pi, ::testing::Eq(3));
+//    ASSERT_THAT(pi, ::testing::Eq(3));
 }
 /**/
 
