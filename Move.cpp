@@ -24,7 +24,7 @@ public:
     CMatrix(const CMatrix & matrix); // copy constructor
 //    CMatrix(CMatrix && matrix); // move constructor
 //    CMatrix& operator=(const CMatrix & matrix) = default; // copy assignment
-//    CMatrix& operator=(CMatrix && matrix); // move assignment
+//    CMatrix& operator=(CMatrix && matrix); // move assignment (just to show)
 
     CMatrix(std::size_t rows, std::size_t columns);
     CMatrix & operator* (CMatrix const & other) const; // used for demonstrating copy
